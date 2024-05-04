@@ -1,5 +1,7 @@
-package com.luj8n.repofinder;
+package com.luj8n.repofinder.controllers;
 
+import com.luj8n.repofinder.services.SearchService;
+import com.luj8n.repofinder.objects.SearchInputs;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;

@@ -1,6 +1,9 @@
-package com.luj8n.repofinder;
+package com.luj8n.repofinder.services;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.luj8n.repofinder.objects.RepoResult;
+import com.luj8n.repofinder.objects.SearchInputs;
+import com.luj8n.repofinder.objects.SearchResult;
 import java.net.URI;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;

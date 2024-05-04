@@ -1,4 +1,4 @@
-package com.luj8n.repofinder;
+package com.luj8n.repofinder.objects;
 
 import java.util.ArrayList;
 import java.util.List;

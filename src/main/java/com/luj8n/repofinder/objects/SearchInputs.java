@@ -1,4 +1,4 @@
-package com.luj8n.repofinder;
+package com.luj8n.repofinder.objects;
 
 public class SearchInputs {
     private String organization;
