@@ -21,8 +21,17 @@ import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+/**
+ * Service class for searching repositories.
+ */
 @Service
 public class SearchService {
+    /**
+     * Searches repositories based on the provided search inputs.
+     *
+     * @param searchInputs The search inputs.
+     * @return The search result.
+     */
     @NonNull
     public SearchResult search(@NonNull SearchInputs searchInputs) {
         SearchResult result = new SearchResult();
@@ -94,6 +103,13 @@ public class SearchService {
         return result;
     }
 
+    /**
+     * Makes a request to the specified URI with the given search inputs.
+     *
+     * @param searchInputs The search inputs.
+     * @param uri          The URI to make the request to.
+     * @return The ResponseEntity containing the response.
+     */
     private ResponseEntity<JsonNode> makeRequest(@NonNull SearchInputs searchInputs,
                                                  @NonNull URI uri) {
         RequestEntity<Void> request = RequestEntity
@@ -112,12 +128,27 @@ public class SearchService {
         }
     }
 
+    /**
+     * Extracts repository information from the provided JSON node.
+     *
+     * @param repo         The JSON node representing a repository.
+     * @param searchInputs The search inputs.
+     * @return The extracted repository result.
+     */
     private RepoResult getRepo(JsonNode repo, SearchInputs searchInputs) {
         return new RepoResult(repo.get("name").asText(), repo.get("html_url").asText(),
             repo.get("description").isNull() ? null : repo.get("description").asText(),
             shouldHighlight(repo.get("contents_url").asText(), searchInputs));
     }
 
+    /**
+     * Determines whether the repository content should be highlighted.
+     * It is highlighted if it contains the word 'Hello'.
+     *
+     * @param contentUrl   The URL of the repository content.
+     * @param searchInputs The search inputs.
+     * @return True if the content should be highlighted, false otherwise.
+     */
     private boolean shouldHighlight(@NonNull String contentUrl,
                                     @NonNull SearchInputs searchInputs) {
         URI uri = URI.create(contentUrl.replace("{+path}", "README.md"));
