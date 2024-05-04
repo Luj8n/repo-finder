@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Repo finder</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, serif;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            width: 60%;
+            margin: 20px auto 0 auto;
+        }
+
+        .repo {
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .highlighted {
+            background-color: #59cb00;
+        }
+
+        .repo-name {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .repo-description {
+            margin-bottom: 10px;
+            font-size: 16px;
+            color: #555555;
+        }
+
+        .pagination {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+        }
+
+        .pagination > a {
+            margin-left: 10px;
+            margin-right: 10px;
+            padding: 5px 10px;
+            border-radius: 3px;
+            background-color: #008cff;
+            color: #ffffff;
+        }
+
+        .pagination > a:hover {
+            background-color: #0058b6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        a.disabled {
+            pointer-events: none;
+            background-color: #bbbbbb;
+        }
+
+        .no-repos {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2 class="no-repos" th:if="${result.repos.empty}">No repositories</h2>
+    <div th:each="repo : ${result.repos}" class="repo"
+         th:classappend="${repo.highlighted ? 'highlighted' : ''}">
+        <a class="repo-name" th:text="${repo.name}" th:href="${repo.url}"/>
+        <h4 class="repo-description" th:text="${repo.description} ?: 'No description'"/>
+    </div>
+</div>
+<div class="pagination">
+    <a th:classappend="${result.prevUrl == null} ? 'disabled' : ''" th:href="${result.prevUrl}">Previous page</a>
+    <a th:classappend="${result.nextUrl == null} ? 'disabled' : ''" th:href="${result.nextUrl}">Next page</a>
+    <a href="/" class="search-again">Search again</a>
+</div>
+</body>
+</html>

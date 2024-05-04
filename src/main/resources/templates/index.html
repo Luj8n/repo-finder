@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Repo finder</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, serif;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .form-wrapper {
+            border: 1px solid #cccccc;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #f6f6f6;
+            width: 30%;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .form-input {
+            padding: 8px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            border: 1px solid #cccccc;
+            width: 100%;
+        }
+
+        .submit-btn {
+            display: block;
+            background-color: #3daf40;
+            color: #ffffff;
+            border-radius: 5px;
+            padding: 5px 20px;
+            margin: 5px auto 0 auto;
+            font-size: 16px;
+            cursor: pointer;
+            border: none
+        }
+
+        .submit-btn:hover {
+            background-color: #28982b;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <form action="#" th:action="@{/search}" th:object="${searchInputs}" method="get" class="form-wrapper">
+        <label for="organization" class="form-label">Organization:</label>
+        <input type="text" id="organization" required th:field="*{organization}" class="form-input"/>
+
+        <label for="token" class="form-label">Access token</label>
+        <input type="text" id="token" required th:field="*{token}" class="form-input"/>
+
+        <input type="submit" value="Search" class="submit-btn"/>
+    </form>
+</div>
+</body>
+</html>
